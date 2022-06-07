@@ -1,0 +1,244 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background: #6441a5;
+  background: -webkit-linear-gradient(to right, #2a0845, #6441a5);
+  background: linear-gradient(to right, #2a0845, #6441a5);
+}
+
+.page-title {
+  color: #628912;
+  font-family: serif;
+  font-weight: normal;
+  text-align: center;
+  font-size: 6em;
+}
+
+.game-info-container {
+  grid-column: 1 / -1;
+  display: flex;
+
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 5rem;
+  /* justify-content: center; */
+  perspective: 500px;
+  /* justify-content: space-between; */
+  margin-top: 10%;
+}
+
+.game-info {
+  font-family: serif;
+  color: #dade0e;
+  font-size: 4em;
+  margin-bottom: 2rem;
+}
+
+.game-container {
+  /* display: grid; */
+  /* grid-template-columns: repeat(4, auto); */
+  /* grid-gap: 10px; */
+  /* margin: 50px; */
+  /* justify-content: center; */
+  perspective: 500px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cardNormal {
+  position: relative;
+  height: 110px;
+  width: 100px;
+}
+
+.cardMedium {
+  position: relative;
+  height: 110px;
+  width: 100px;
+}
+
+.cardNormal.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.cardMedium.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-13px);
+  }
+  40% {
+    transform: translateX(13px);
+  }
+  60% {
+    transform: translateX(-8px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+  transition: transform 300ms ease-in-out;
+  /* 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 7px;
+  background: #fff;
+  pointer-events: none;
+  backface-visibility: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s linear; */
+}
+
+.cardNormal.visible .card-back {
+  transform: rotateY(-180deg);
+}
+
+.cardNormal.visible .card-front {
+  transform: rotateY(0);
+}
+
+.cardMedium.visible .card-back {
+  transform: rotateY(-180deg);
+}
+
+.cardMedium.visible .card-front {
+  transform: rotateY(0);
+}
+/* .card.matched .card-value {
+  animation: dance 1s linear infinite 500ms;
+  width: inherit;
+} */
+
+.overlay-text {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color: #628912;
+  font-family: serif;
+}
+
+.overlay-text-small {
+  font-size: 0.3em;
+}
+
+.overlay-text-large {
+  margin-top: 2rem;
+  font-size: 4rem;
+}
+
+.overlay-text.visible {
+  display: flex;
+  flex-direction: column;
+  animation: overlay-grow 500ms forwards;
+}
+
+@keyframes overlay-grow {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 10em;
+  }
+}
+
+.card-back {
+  background-color: black;
+  border-color: black;
+}
+
+.card-front {
+  background-color: #c7be3a;
+  /* max-width: 45px; */
+  border-color: #333;
+  transform: rotateY(180deg);
+}
+
+.card-value {
+  /* transition: transform 100ms ease-in-out;
+  transform: scale(0.9); */
+  /* width: inherit; */
+  max-width: 80%;
+}
+
+/* .card-front:hover .card-value {
+  transform: scale(1);
+} */
+
+.wrapper1 {
+  /* grid-column: 1 / -1; */
+  display: grid;
+  /* display: none; */
+  grid-template-columns: repeat(4, auto);
+  padding: 1.2rem;
+  grid-gap: 0.4rem;
+  /* margin: 50px; */
+  justify-content: center;
+  perspective: 500px;
+  border-radius: 0.5rem;
+  /* justify-content: space-between; */
+  background: #1fce42;
+  background: -webkit-linear-gradient(to right, #0fd3b9, #11cee3);
+  background: linear-gradient(to right, #6bd82c, #16d777);
+}
+
+.wrapper2 {
+  /* grid-column: 1 / -1; */
+  /* display: grid; */
+  display: none;
+  grid-template-columns: repeat(6, auto);
+  padding: 1.2rem;
+  grid-gap: 0.4rem;
+  /* margin: 50px; */
+  justify-content: center;
+  perspective: 500px;
+  border-radius: 0.5rem;
+  /* justify-content: space-between; */
+  background: #1fce42;
+  background: -webkit-linear-gradient(to right, #0fd3b9, #11cee3);
+  background: linear-gradient(to right, #6bd82c, #16d777);
+}
+
+.wrapper1 .visible {
+  display: grid;
+}
+
+.wrapper2 .visible {
+  display: grid;
+}
