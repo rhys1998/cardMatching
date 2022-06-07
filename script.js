@@ -1,3 +1,7 @@
+const selectors = {
+  board: document.querySelector('wrapper1')
+};
+let id = true;
 class AudioController {
   constructor() {
     this.bgMusic = new Audio(
@@ -159,7 +163,7 @@ class FlipCards {
     return card.getElementsByClassName('card-value')[0].src;
   }
   canFlipCard(card) {
-    return !this.busy && !this.matchedCards.includes(card) && card !== this.cardToCheck;
+    return !this.busy && this.matchedCards && !this.matchedCards.includes(card) && card !== this.cardToCheck;
   }
 }
 
@@ -170,19 +174,15 @@ if (document.readyState == 'loading') {
 }
 
 function ready() {
-  console.log(document.getElementById('id').style.display);
-  let gameLevel = 'medium';
+  // let gameLevel = 'normal';
+  // console.log('document', selectors.board);
+
   let cards = [];
   let overlays = Array.from(document.getElementsByClassName('overlay-text'));
-  if (gameLevel === 'normal') {
-    cards = Array.from(document.getElementsByClassName('cardNormal'));
-    console.log('cards: normal ', cards);
-  }
-  if (gameLevel === 'medium') {
-    cards = Array.from(document.getElementsByClassName('cardMedium'));
-    console.log('cards: ', cards);
-  }
-  let game = new FlipCards(50, cards);
+  let str = id ? 'cardNormal' : 'cardMedium';
+  cards = Array.from(document.getElementsByClassName(str));
+  let timer = id ? 50 : 70;
+  let game = new FlipCards(timer, cards);
   console.log('cards: ', cards);
 
   overlays.forEach(overlay => {
@@ -197,4 +197,20 @@ function ready() {
       game.flipCard(card);
     });
   });
+}
+
+function changeLevelNormal(level) {
+  id = true;
+  document.getElementById('normal').style.display = 'grid';
+  document.getElementById('medium').style.display = 'none';
+  console.log(' document.getElementById', document.getElementById('normal'));
+  ready();
+}
+
+function changeLevelMedium(level) {
+  id = false;
+  document.getElementById('normal').style.display = 'none';
+  document.getElementById('medium').style.display = 'grid';
+  console.log(' document.getElementById', document.getElementById('medium'));
+  ready();
 }

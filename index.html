@@ -22,12 +22,12 @@
       <span class="overlay-text-small">Click to Restart</span>
     </div>
 
-    <div class="game-container">
+    <div class="game-container" id="container">
       <div class="game-info-container">
         <div class="game-info">Time <span id="time-remaining">30</span></div>
         <div class="game-info">Flips <span id="flips">0</span></div>
       </div>
-      <div class="wrapper1" id="id">
+      <div class="wrapper1" id="normal" data-dimension="4">
         <div class="cardNormal">
           <div class="card-back card-face"></div>
           <div class="card-front card-face">
@@ -125,7 +125,7 @@
           </div>
         </div>
       </div>
-      <div class="wrapper2">
+      <div class="wrapper2" id="medium">
         <div class="cardMedium">
           <div class="card-back card-face"></div>
           <div class="card-front card-face">
@@ -346,12 +346,14 @@
       </div>
     </div>
 
-    <div class="overlay-text-large">
-      <button type="button" onclick="document.getElementsById('wrapper1').style.display = 'none'" value="normal">
-        Normal
-      </button>
+    <div class="buttonmain" id="main">
+      <div class="buttonNormal">
+        <button class="button" id="normalButton" onclick="changeLevelNormal()">Normal</button>
+      </div>
+      <div class="buttonMedium">
+        <button class="button" id="mediumButton" onclick="changeLevelMedium()">Medium</button>
+      </div>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
