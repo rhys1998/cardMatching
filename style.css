@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Fredoka;
+  src: url(./FredokaOne-Regular.ttf);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,7 +20,7 @@ body {
 
 .page-title {
   color: #628912;
-  font-family: serif;
+  font-family: Fredoka;
   font-weight: normal;
   text-align: center;
   font-size: 6em;
@@ -23,11 +28,11 @@ body {
 
 .game-info-container {
   grid-column: 1 / -1;
-  display: flex;
-
+  /* display: flex; */
+  width: 110%;
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-gap: 5rem;
+  grid-gap: 10%;
   /* justify-content: center; */
   perspective: 500px;
   /* justify-content: space-between; */
@@ -35,9 +40,10 @@ body {
 }
 
 .game-info {
-  font-family: serif;
+  display: none;
+  font-family: Fredoka;
   color: #dade0e;
-  font-size: 4em;
+  font-size: 3em;
   margin-bottom: 2rem;
 }
 
@@ -62,8 +68,8 @@ body {
 
 .cardMedium {
   position: relative;
-  height: 110px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .cardNormal.shake {
@@ -149,7 +155,7 @@ body {
   align-items: center;
   z-index: 100;
   color: #628912;
-  font-family: serif;
+  font-family: Fredoka;
 }
 
 .overlay-text-small {
@@ -184,7 +190,8 @@ body {
 }
 
 .card-front {
-  background-color: #c7be3a;
+  background-color: #fdf8e6;
+  font-size: 3rem;
   /* max-width: 45px; */
   border-color: #333;
   transform: rotateY(180deg);
@@ -197,14 +204,12 @@ body {
   max-width: 80%;
 }
 
-/* .card-front:hover .card-value {
-  transform: scale(1);
-} */
+
 
 .wrapper1 {
   /* grid-column: 1 / -1; */
   /* display: grid; */
-  /* display: none; */
+  display: none;
   grid-template-columns: repeat(4, auto);
   padding: 1.2rem;
   grid-gap: 0.4rem;
@@ -221,7 +226,7 @@ body {
 .wrapper2 {
   /* grid-column: 1 / -1; */
   /* display: grid; */
-  /* display: none; */
+  display: none;
   grid-template-columns: repeat(6, auto);
   padding: 1.2rem;
   grid-gap: 0.4rem;
@@ -234,11 +239,14 @@ body {
   background: -webkit-linear-gradient(to right, #0fd3b9, #11cee3);
   background: linear-gradient(to right, #6bd82c, #16d777);
 }
-/* 
-.level1 .visible {
-  display: none;
-}
 
-.level2 .visible {
-  display: grid;
-} */
+.button {
+  background: #282a3a;
+  color: rgb(14, 233, 36);
+  border-radius: 5px;
+  padding: 10px 20px;
+  border: 0;
+  cursor: pointer;
+  font-family: Fredoka;
+  font-size: 18pt;
+}

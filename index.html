@@ -8,121 +8,101 @@
   <body>
     <!--   -->
 
-    <div class="overlay-text visible">
+    <div class="overlay-text visible" id="new">
       Flip Cards
       <span class="overlay-text-large">Click to Start</span>
+      <div class="buttonmain" id="main">
+        <button class="button" id="normalButton" onclick="readyNormal()">Normal</button>
+        <button class="button" id="mediumButton" onclick="readyMedium()">Medium</button>
+      </div>
     </div>
 
     <div id="game-over-text" class="overlay-text">
       GAME OVER
       <span class="overlay-text-small">Restart</span>
+      <div class="buttonmain" id="main">
+        <button class="button" id="normalButton" onclick="readyNormal()">Normal</button>
+        <button class="button" id="mediumButton" onclick="readyMedium()">Medium</button>
+      </div>
     </div>
     <div id="victory-text" class="overlay-text">
       VICTORY
       <span class="overlay-text-small">Click to Restart</span>
+      <div class="buttonmain" id="main">
+        <button class="button" id="normalButton" onclick="readyNormal()">Normal</button>
+        <button class="button" id="mediumButton" onclick="readyMedium()">Medium</button>
+      </div>
     </div>
 
     <div class="game-container" id="container">
       <div class="game-info-container">
-        <div class="game-info">Time <span id="time-remaining">30</span></div>
-        <div class="game-info">Flips <span id="flips">0</span></div>
+        <div class="game-info" id="time">Time <span id="time-remaining">0</span></div>
+        <div class="game-info" id="flip">Flips <span id="flips">0</span></div>
       </div>
-      <div class="wrapper1" id="normal" data-dimension="4">
+      <div class="wrapper1" id="normal">
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-1.png" />
-          </div>
+          <div class="card-front card-face">🥔</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-1.png" />
-          </div>
+          <div class="card-front card-face">🥔</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-2.png" />
-          </div>
+          <div class="card-front card-face">🍒</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-2.png" />
-          </div>
+          <div class="card-front card-face">🍒</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-3.png" />
-          </div>
+          <div class="card-front card-face">🥑</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-3.png" />
-          </div>
+          <div class="card-front card-face">🥑</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-4.png" />
-          </div>
+          <div class="card-front card-face">🌽</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-4.png" />
-          </div>
+          <div class="card-front card-face">🌽</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-5.png" />
-          </div>
+          <div class="card-front card-face">🥕</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-5.png" />
-          </div>
+          <div class="card-front card-face">🥕</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-6.png" />
-          </div>
+          <div class="card-front card-face">🍇</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-6.png" />
-          </div>
+          <div class="card-front card-face">🍇</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-7.png" />
-          </div>
+          <div class="card-front card-face">🍉</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-7.png" />
-          </div>
+          <div class="card-front card-face">🍉</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-8.png" />
-          </div>
+          <div class="card-front card-face">🍌</div>
         </div>
         <div class="cardNormal">
           <div class="card-back card-face"></div>
-          <div class="card-front card-face">
-            <img class="card-value" src="assets/Images/img-8.png" />
-          </div>
+          <div class="card-front card-face">🍌</div>
         </div>
       </div>
       <div class="wrapper2" id="medium">
@@ -343,15 +323,6 @@
             <img class="card-value" src="assets/Images/img-18.png" />
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="buttonmain" id="main">
-      <div class="buttonNormal">
-        <button class="button" id="normalButton" onclick="changeLevelNormal()">Normal</button>
-      </div>
-      <div class="buttonMedium">
-        <button class="button" id="mediumButton" onclick="changeLevelMedium()">Medium</button>
       </div>
     </div>
     <script src="script.js"></script>
