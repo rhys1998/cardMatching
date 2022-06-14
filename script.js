@@ -68,10 +68,8 @@ const pickRandom = (array, items) => {
   return randomPicks;
 };
 
-function levelNormal(dataDimensions, level, id) {
+function changeLevel(dataDimensions, level, id, cardType) {
   const dimensions = dataDimensions;
-  console.log('dimensions: ', id);
-
   const picks = pickRandom(emojis, (dimensions * dimensions) / 2);
   const items = shuffle([...picks, ...picks]);
 
@@ -80,7 +78,7 @@ function levelNormal(dataDimensions, level, id) {
           ${items
             .map(
               item => `
-              <div class="cardNormal">
+              <div class=${cardType}>
                   <div class="card-back card-face"></div>
                   <div class="card-front card-face">${item}</div>
               </div>
@@ -89,39 +87,21 @@ function levelNormal(dataDimensions, level, id) {
             .join('')}
      </div>
   `;
-
-  const parser = new DOMParser().parseFromString(cards, 'text/html');
-  document.querySelector('.level1').replaceWith(parser.querySelector('.level1'));
-  cardsNew = Array.from(document.getElementsByClassName('cardNormal'));
+  if (level === 'level1') {
+    const parser = new DOMParser().parseFromString(cards, 'text/html');
+    document.querySelector('.level1').replaceWith(parser.querySelector('.level1'));
+    cardsNew = Array.from(document.getElementsByClassName('cardNormal'));
+  } else if (level === 'level2') {
+    const parser = new DOMParser().parseFromString(cards, 'text/html');
+    document.querySelector('.level2').replaceWith(parser.querySelector('.level2'));
+    cardsNew = Array.from(document.getElementsByClassName('cardMedium'));
+  } else {
+    const parser = new DOMParser().parseFromString(cards, 'text/html');
+    document.querySelector('.level3').replaceWith(parser.querySelector('.level3'));
+    cardsNew = Array.from(document.getElementsByClassName('cardHard'));
+  }
 }
 
-function levelHard(dataDimensions) {
-  const dimensions = dataDimensions;
-  const picks = pickRandom(emojis, (dimensions * dimensions) / 2);
-  const items = shuffle([...picks, ...picks]);
-
-  let cards = `
-      <div class="level3" id='hard' style="grid-template-columns: repeat(${dimensions}, auto)">
-          ${items
-            .map(
-              item => `
-              <div class="cardHard">
-                  <div class="card-back card-face"></div>
-                  <div class="card-front card-face">${item}</div>
-              </div>
-          `
-            )
-            .join('')}
-     </div>
-  `;
-
-  const parser = new DOMParser().parseFromString(cards, 'text/html');
-  console.log('parser: ', document.querySelector('.level3'));
-  console.log('new', parser.querySelector('.level3'));
-  document.querySelector('.level3').replaceWith(parser.querySelector('.level3'));
-  cardsNew = Array.from(document.getElementsByClassName('cardHard'));
-  console.log('cardsNew: ', cardsNew);
-}
 class AudioController {
   constructor() {
     this.bgMusic = new Audio('assets/Audio/game-music-7408.mp3');
@@ -163,18 +143,14 @@ class FlipCards {
     this.cardsArray = cards;
     this.totalTime = totalTime;
     this.timeRemaining = totalTime;
-    console.log('this.timeRemaining: ', this.timeRemaining);
     this.timer = document.getElementById('time-remaining');
     this.ticker = document.getElementById('flips');
     this.audioController = new AudioController();
   }
 
   startGame() {
-    console.log('start Game');
-
     this.totalClicks = 0;
     this.timeRemaining = this.totalTime;
-    // console.log('timeRemaining: ', this.timeRemaining);
     this.cardToCheck = null;
     this.matchedCards = [];
     this.busy = true;
@@ -185,7 +161,6 @@ class FlipCards {
       if (this.countdown) clearInterval(this.countdown);
       this.countdown = setInterval(() => {
         this.timeRemaining--;
-        // console.log('timeRemaining: ', this.timeRemaining);
         this.timer.innerText = this.timeRemaining;
         if (this.timeRemaining === 0) this.gameOver();
       }, 1000);
@@ -197,25 +172,14 @@ class FlipCards {
     this.ticker.innerText = this.totalClicks;
   }
 
-  // startCountdown() {
-  //   if (this.timerIntervalId) clearInterval(this.timerIntervalId);
-  //   return (this.timerIntervalId = setInterval(() => {
-  //     this.timeRemaining--;
-  //     console.log('timeRemaining: ', this.timeRemaining);
-  //     this.timer.innerText = this.timeRemaining;
-  //     if (this.timeRemaining === 0) this.gameOver();
-  //   }, 1000));
-  // }
   gameOver() {
     clearInterval(this.countdown);
     clearTimeout(this.timeOut);
     this.audioController.gameOver();
 
     document.getElementById('game-over-text').classList.add('visible');
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 1500);
   }
+
   victory() {
     clearInterval(this.countdown);
     this.audioController.victory();
@@ -256,7 +220,6 @@ class FlipCards {
     card2.classList.add('matched');
     this.audioController.match();
     if (this.matchedCards.length === this.cardsArray.length) {
-      console.log('victory: ');
       this.victory();
     }
   }
@@ -266,12 +229,6 @@ class FlipCards {
       card1.classList.add('shake');
       card2.classList.add('shake');
     }, 400);
-    // setTimeout(() => {
-    //   cardOne.classList.remove('shake', 'flip');
-    //   cardTwo.classList.remove('shake', 'flip');
-    //   cardOne = cardTwo = '';
-    //   disableDeck = false;
-    // }, 1200);
     setTimeout(() => {
       card1.classList.remove('shake', 'visible');
       card2.classList.remove('shake', 'visible');
@@ -280,16 +237,8 @@ class FlipCards {
   }
   shuffleCards(cardsArray) {
     const clonedArray = [...cardsArray];
-    // console.log('clonedArray: ', clonedArray);
     for (let i = 0; i < clonedArray.length; i++) {
-      // const randIndex = Math.floor(Math.random() * (i + 1));
-      // console.log('randIndex: ', randIndex);
-
-      // [cardsArray[i], cardsArray[randIndex]] = [cardsArray[randIndex], cardsArray[i]];
-
       const random = Math.floor(Math.random() * clonedArray.length);
-      // console.log('random: ', random);
-
       let previous = clonedArray[i];
       clonedArray[i] = clonedArray[random];
       clonedArray[random] = previous;
@@ -313,35 +262,20 @@ class FlipCards {
   }
 }
 
-// if (document.readyState == 'loading') {
-//   document.addEventListener('DOMContentLoaded', ready);
-// } else {
-//   ready();
-// }
-
 function readyNormal() {
   clearInterval(this.timerIntervalId);
-  levelNormal(4, 'level1', 'normal');
-  console.log('cardsNew', cardsNew);
+  changeLevel(4, 'level1', 'normal', 'cardNormal');
   let cards = [];
-  let overlays = Array.from(document.getElementsByClassName('overlay-text'));
   document.getElementById('container').classList.remove('visible');
   document.getElementById('hard').style.display = 'none';
+  document.getElementById('medium').style.display = 'none';
   document.getElementById('game-over-text').classList.remove('visible');
   document.getElementById('victory-text').classList.remove('visible');
   document.getElementById('new').classList.remove('visible');
   document.getElementById('time').style.display = 'block';
   document.getElementById('flip').style.display = 'block';
-  // document.getElementById('hard').style.display = 'none';
-  // document.getElementById('normal').style.display = 'grid';
   cards = cardsNew;
-  let game = new FlipCards(15, cards);
-  overlays.forEach(overlay => {
-    overlay.addEventListener('click', () => {
-      // overlay.classList.remove('visible');
-      // game.startGame();
-    });
-  });
+  let game = new FlipCards(30, cards);
   game.startGame();
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -351,9 +285,10 @@ function readyNormal() {
 }
 function readyMedium() {
   clearInterval(this.timerIntervalId);
-  levelNormal(6, 'level1', 'normal');
+  changeLevel(6, 'level2', 'medium', 'cardMedium');
   let cards = [];
   let overlays = Array.from(document.getElementsByClassName('overlay-text'));
+  document.getElementById('normal').style.display = 'none';
   document.getElementById('hard').style.display = 'none';
   document.getElementById('container').classList.remove('visible');
   document.getElementById('game-over-text').classList.remove('visible');
@@ -361,17 +296,8 @@ function readyMedium() {
   document.getElementById('new').classList.remove('visible');
   document.getElementById('time').style.display = 'block';
   document.getElementById('flip').style.display = 'block';
-  // document.getElementById('normal').style.display = 'grid';
-  // document.getElementById('hard').style.display = 'grid';
-  // cards = Array.from(document.getElementsByClassName('cardHard'));
   cards = cardsNew;
-  let game = new FlipCards(10, cards);
-  // overlays.forEach(overlay => {
-  //   overlay.addEventListener('click', () => {
-  //     // overlay.classList.remove('visible');
-  //     // game.startGame();
-  //   });
-  // });
+  let game = new FlipCards(80, cards);
   game.startGame();
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -382,27 +308,18 @@ function readyMedium() {
 
 function readyHard() {
   clearInterval(this.timerIntervalId);
-  levelHard(8);
+  changeLevel(8, 'level3', 'hard', 'cardHard');
   let cards = [];
-  let overlays = Array.from(document.getElementsByClassName('overlay-text'));
   document.getElementById('normal').style.display = 'none';
+  document.getElementById('medium').style.display = 'none';
   document.getElementById('container').classList.remove('visible');
   document.getElementById('game-over-text').classList.remove('visible');
   document.getElementById('victory-text').classList.remove('visible');
   document.getElementById('new').classList.remove('visible');
   document.getElementById('time').style.display = 'block';
   document.getElementById('flip').style.display = 'block';
-  // document.getElementById('normal').style.display = 'grid';
-  // document.getElementById('hard').style.display = 'grid';
-  // cards = Array.from(document.getElementsByClassName('cardHard'));
   cards = cardsNew;
-  let game = new FlipCards(10, cards);
-  // overlays.forEach(overlay => {
-  //   overlay.addEventListener('click', () => {
-  //     // overlay.classList.remove('visible');
-  //     // game.startGame();
-  //   });
-  // });
+  let game = new FlipCards(150, cards);
   game.startGame();
   cards.forEach(card => {
     card.addEventListener('click', () => {

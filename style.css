@@ -58,8 +58,14 @@ body {
 
 .cardNormal {
   position: relative;
-  height: 110px;
-  width: 100px;
+  height: 7rem;
+  width: 7rem;
+}
+
+.cardMedium {
+  position: relative;
+  height: 6rem;
+  width: 6rem;
 }
 
 .cardHard {
@@ -69,6 +75,10 @@ body {
 }
 
 .cardNormal.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.cardMedium.shake {
   animation: shake 0.3s ease-in-out;
 }
 
@@ -115,6 +125,14 @@ body {
 }
 
 .cardNormal.visible .card-front {
+  transform: rotateY(0);
+}
+
+.cardMedium.visible .card-back {
+  transform: rotateY(-180deg);
+}
+
+.cardMedium.visible .card-front {
   transform: rotateY(0);
 }
 
@@ -174,20 +192,27 @@ body {
 .card-front {
   background-color: #fdf8e6;
   font-size: 3rem;
-  /* max-width: 45px; */
   border-color: #333;
   transform: rotateY(180deg);
 }
 
 .card-value {
-  /* transition: transform 100ms ease-in-out;
-  transform: scale(0.9); */
-  /* width: inherit; */
   max-width: 80%;
 }
 
 .level1 {
-  /* grid-column: 1 / -1; */
+  display: grid;
+  padding: 1.2rem;
+  grid-gap: 0.4rem;
+  justify-content: center;
+  perspective: 500px;
+  border-radius: 0.5rem;
+  background: #1fce42;
+  background: -webkit-linear-gradient(to right, #0fd3b9, #11cee3);
+  background: linear-gradient(to right, #6bd82c, #16d777);
+}
+
+.level2 {
   display: grid;
   padding: 1.2rem;
   grid-gap: 0.4rem;
@@ -200,7 +225,6 @@ body {
 }
 
 .level3 {
-  /* grid-column: 1 / -1; */
   display: grid;
   padding: 1.2rem;
   grid-gap: 0.4rem;
